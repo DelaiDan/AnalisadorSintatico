@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <title>Analisador Sintático</title>
+  </head>
+  <body>
+    <header>
+      <div class="content">
+        <h1>Analisador Sintático</h1>
+        <p>por:</p>
+        <a href="https://github.com/DelaiDan/AnalisadorLexico">Arthur Delai</a>
+      </div>
+    </header>
+    <section id="main" class="content">
+      <div class="top-forms">
+        <h3>Inserir Sentença</h3>
+        <div class="insert">
+          <input
+            id="tokenInput"
+            type="text"
+            placeholder="Digite a Sentença"
+            onDrop="return false"
+            oninput="initAutomaton()" />
+          <button id="tokenGenerate" onclick="initSentence()" class="btn-default">Gerar</button>
+        </div>
+      </div>
+      <div id="dropdown">
+        <div id="dropdown-click" onclick="toggleDropdown()">
+            <h3 class="title-dropdown">Informações</h3>
+        </div>
+        <div class="infos">
+          <div class="grammar">
+            <div class="info">
+              <h3>Gramática</h3>
+              <div>
+                <span>S := ABC </span><br />
+                <span>A := aAb | ε</span><br />
+                <span>B := cBCcA | d</span><br />
+                <span>C := eCBe | f</span><br />
+              </div>
+            </div>
+            <div class="info">
+              <h3>First</h3>
+              <div>
+                <span>S = {a, c, d}</span><br />
+                <span>A = {a, ε}</span><br />
+                <span>B = {c, d}</span><br />
+                <span>C = {e, f}</span><br />
+              </div>
+            </div>
+            <div class="info">
+              <h3>Follow</h3>
+              <div>
+                <span>S = {$}</span><br />
+                <span>A = {b, c, d, e, f}</span><br />
+                <span>B = {e, f}</span><br />
+                <span>C = {$, c, d}</span><br />
+              </div>
+            </div>
+          </div>
+          <div class="parsing">
+            <h3>Tabela de Parsing</h3>
+            <div>
+              <table id="parsingTable" class="tg table" style="width: 100%">
+                <th></th>
+                <th>a</th>
+                <th>b</th>
+                <th>c</th>
+                <th>d</th>
+                <th>e</th>
+                <th>f</th>
+                <th>$</th>
+                <tr>
+                  <td>S</td>
+                  <td>S -> ABC</td>
+                  <td></td>
+                  <td>S -> ABC</td>
+                  <td>S -> ABC</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>A</td>
+                  <td>A -> aAb</td>
+                  <td>A -> ε</td>
+                  <td>A -> ε</td>
+                  <td>A -> ε</td>
+                  <td>A -> ε</td>
+                  <td>A -> ε</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>B</td>
+                  <td></td>
+                  <td></td>
+                  <td>B -> cBCcA</td>
+                  <td>B -> d</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>C</td>
+                  <td></td>
+                  <td></td>
+                  <td>C -> eCBe</td>
+                  <td></td>
+                  <td></td>
+                  <td>C -> f</td>
+                  <td></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom-forms">
+        <div class="validate-wrapper">
+          <div class="validate">
+            <h3>Passos</h3>
+            <button id="nextPass" onclick="nextPass()" class="btn-default">Próximo Passo</button>
+            <button id="lastPass" onclick="checkEnd()" class="btn-default">Resolver</button>
+          </div>
+        </div>
+        <div class="table-wrapper">
+          <table id="resolutionTable" class="table"></table>
+          <div id="anchor"></div>
+        </div>
+      </div>
+    </section>
+    <footer></footer>
+  </body>
+  <script src="js/default.js"></script>
+</html>
