@@ -9,6 +9,12 @@
 // First(C) = {e, f}       Follow(C) = {$, c, d}
 
 // abcdfcf -> OK em 15
+// defde -> OK em 24
+// abdf -> OK em 10
+// aabbdefde -> OK em 18
+
+// cdfcfac -> ERRO em 13
+// acbdf -> ERRO em 5
 
 class NonTerminal {
     constructor(key, list){
