@@ -77,6 +77,7 @@ function initSentence(){
             sentence = "S";
             nTerminal = "S";
             steps = 0;
+            complete = false;
         }
     }
 
